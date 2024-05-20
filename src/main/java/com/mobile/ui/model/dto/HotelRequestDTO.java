@@ -2,8 +2,10 @@ package com.mobile.ui.model.dto;
 
 import java.util.List;
 
+
 public class HotelRequestDTO {
 
+	private long hotelId;
 	private String hotelImage;
 	private String hotelName;
 	private String hotelCity;
@@ -12,6 +14,13 @@ public class HotelRequestDTO {
 	private List<String> hotelFacility;
 	private double roomPrice;
 	
+	
+	public long getHotelId() {
+		return hotelId;
+	}
+	public void setHotelId(long hotelId) {
+		this.hotelId = hotelId;
+	}
 	public String getHotelImage() {
 		return hotelImage;
 	}
@@ -59,9 +68,10 @@ public class HotelRequestDTO {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public HotelRequestDTO(String hotelImage, String hotelName, String hotelCity, double hotelRating,
+	public HotelRequestDTO(long hotelId, String hotelImage, String hotelName, String hotelCity, double hotelRating,
 			String hotelAddress, List<String> hotelFacility, double roomPrice) {
 		super();
+		this.hotelId = hotelId;
 		this.hotelImage = hotelImage;
 		this.hotelName = hotelName;
 		this.hotelCity = hotelCity;
@@ -70,19 +80,13 @@ public class HotelRequestDTO {
 		this.hotelFacility = hotelFacility;
 		this.roomPrice = roomPrice;
 	}
+	
 	@Override
 	public String toString() {
-		return "HotelRequestDTO [hotelImage=" + hotelImage + ", hotelName=" + hotelName + ", hotelCity=" + hotelCity
-				+ ", hotelRating=" + hotelRating + ", hotelAddress=" + hotelAddress + ", hotelFacility=" + hotelFacility
-				+ ", roomPrice=" + roomPrice + "]";
+		return "HotelRequestDTO [hotelId=" + hotelId + ", hotelImage=" + hotelImage + ", hotelName=" + hotelName
+				+ ", hotelCity=" + hotelCity + ", hotelRating=" + hotelRating + ", hotelAddress=" + hotelAddress
+				+ ", hotelFacility=" + hotelFacility + ", roomPrice=" + roomPrice + "]";
 	}
-	
-	
-	
-	
-	
-	
-	
 	
 
 }

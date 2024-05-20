@@ -13,6 +13,7 @@ public class HotelListRestController {
 	public ResponseEntity<String> getHotelData() {
 	    String jsonData = "[\n" +
 	            "    {\n" +
+	            "        \"hotelId\": 1,\n" +
 	            "        \"hotelImage\": \"https://example.com/hotel1.jpg\",\n" +
 	            "        \"hotelName\": \"Hotel One\",\n" +
 	            "        \"hotelCity\": \"City One\",\n" +
@@ -22,6 +23,7 @@ public class HotelListRestController {
 	            "        \"roomPrice\": 150\n" +
 	            "    },\n" +
 	            "    {\n" +
+	            "        \"hotelId\": 2,\n" +
 	            "        \"hotelImage\": \"https://example.com/hotel2.jpg\",\n" +
 	            "        \"hotelName\": \"Hotel Two\",\n" +
 	            "        \"hotelCity\": \"City Two\",\n" +
@@ -31,6 +33,7 @@ public class HotelListRestController {
 	            "        \"roomPrice\": 120\n" +
 	            "    },\n" +
 	            "    {\n" +
+	            "        \"hotelId\": 3,\n" +
 	            "        \"hotelImage\": \"https://example.com/hotel3.jpg\",\n" +
 	            "        \"hotelName\": \"Hotel Three\",\n" +
 	            "        \"hotelCity\": \"City Three\",\n" +
@@ -40,6 +43,7 @@ public class HotelListRestController {
 	            "        \"roomPrice\": 180\n" +
 	            "    },\n" +
 	            "    {\n" +
+	            "        \"hotelId\": 4,\n" +
 	            "        \"hotelImage\": \"https://example.com/hotel4.jpg\",\n" +
 	            "        \"hotelName\": \"Hotel Four\",\n" +
 	            "        \"hotelCity\": \"City Four\",\n" +
@@ -49,6 +53,7 @@ public class HotelListRestController {
 	            "        \"roomPrice\": 160\n" +
 	            "    },\n" +
 	            "    {\n" +
+	            "        \"hotelId\": 5,\n" +
 	            "        \"hotelImage\": \"https://example.com/hotel5.jpg\",\n" +
 	            "        \"hotelName\": \"Hotel Five\",\n" +
 	            "        \"hotelCity\": \"City Five\",\n" +
@@ -58,6 +63,7 @@ public class HotelListRestController {
 	            "        \"roomPrice\": 200\n" +
 	            "    },\n" +
 	            "    {\n" +
+	            "        \"hotelId\": 6,\n" +
 	            "        \"hotelImage\": \"https://example.com/hotel6.jpg\",\n" +
 	            "        \"hotelName\": \"Hotel Six\",\n" +
 	            "        \"hotelCity\": \"City Six\",\n" +
@@ -67,6 +73,7 @@ public class HotelListRestController {
 	            "        \"roomPrice\": 130\n" +
 	            "    },\n" +
 	            "    {\n" +
+	            "        \"hotelId\": 7,\n" +
 	            "        \"hotelImage\": \"https://example.com/hotel7.jpg\",\n" +
 	            "        \"hotelName\": \"Hotel Seven\",\n" +
 	            "        \"hotelCity\": \"City Seven\",\n" +
@@ -76,6 +83,7 @@ public class HotelListRestController {
 	            "        \"roomPrice\": 220\n" +
 	            "    },\n" +
 	            "    {\n" +
+	            "        \"hotelId\": 8,\n" +
 	            "        \"hotelImage\": \"https://example.com/hotel8.jpg\",\n" +
 	            "        \"hotelName\": \"Hotel Eight\",\n" +
 	            "        \"hotelCity\": \"City Eight\",\n" +
@@ -85,6 +93,7 @@ public class HotelListRestController {
 	            "        \"roomPrice\": 140\n" +
 	            "    },\n" +
 	            "    {\n" +
+	            "        \"hotelId\": 9,\n" +
 	            "        \"hotelImage\": \"https://example.com/hotel9.jpg\",\n" +
 	            "        \"hotelName\": \"Hotel Nine\",\n" +
 	            "        \"hotelCity\": \"City Nine\",\n" +
@@ -94,6 +103,7 @@ public class HotelListRestController {
 	            "        \"roomPrice\": 190\n" +
 	            "    },\n" +
 	            "    {\n" +
+	            "        \"hotelId\": 10,\n" +
 	            "        \"hotelImage\": \"https://example.com/hotel10.jpg\",\n" +
 	            "        \"hotelName\": \"Hotel Ten\",\n" +
 	            "        \"hotelCity\": \"City Ten\",\n" +
@@ -107,5 +117,5 @@ public class HotelListRestController {
 	    return new ResponseEntity<>(jsonData, HttpStatus.OK);
 	}
 
-
+	
 }
