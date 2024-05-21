@@ -27,6 +27,9 @@ public class HotelController {
 	@Autowired
 	private ObjectMapper objectMapper;
 
+	public List<HotelRequestDTO> hotelList;
+	public HotelSearch hotelSearch;
+
 	@GetMapping("/hotelSearch")
 	public String hotelSearch(Model model) {
 
@@ -36,6 +39,7 @@ public class HotelController {
 	@PostMapping("/hotelList")
 	public String hotelList(@ModelAttribute HotelSearch hotelSearch, Model model) {
 
+		this.hotelSearch = hotelSearch;
 		// Make an HTTP GET request to the hotelDataList API
 		String apiUrl = "http://localhost:8091/hotelDataList";
 		ResponseEntity<String> responseEntity = restTemplate.getForEntity(apiUrl, String.class);
@@ -44,9 +48,8 @@ public class HotelController {
 		String hotelData = responseEntity.getBody();
 
 		try {
-			List<HotelRequestDTO> hotelList = objectMapper.readValue(hotelData,
-					new TypeReference<List<HotelRequestDTO>>() {
-					});
+			hotelList = objectMapper.readValue(hotelData, new TypeReference<List<HotelRequestDTO>>() {
+			});
 			// Now you have a list of HotelRequestDTO objects
 			System.out.println(hotelList);
 			model.addAttribute("hotelList", hotelList);
@@ -58,17 +61,31 @@ public class HotelController {
 		return "hotelList";
 
 	}
-	
-	
-    //execute after select room
-	   @PostMapping("/hotelList/{hotelId}")
-	    public String handleHotelSelection(@PathVariable("hotelId") Long hotelId, Model model) {
-	        // Your logic to handle the hotel selection
-	        // For instance, you can call a service to fetch hotel details by ID
-	        // Hotel hotel = hotelService.findHotelById(hotelId);
-	        // model.addAttribute("hotel", hotel);
-	        System.out.println("Selected hotel ID: " + hotelId);
-	        return "hotelDetails"; // Return the name of the view to display hotel details
+
+	// execute after select room
+	@PostMapping("/hotelList/{hotelId}")
+	public String handleHotelSelection(@PathVariable("hotelId") long hotelId, Model model) {
+		
+		System.out.println("Selected hotel ID: " + hotelId);
+		System.out.println(hotelSearch);
+		
+		
+		  // Find the hotel with the matching ID
+	    HotelRequestDTO selectedHotel = null;
+	    for (HotelRequestDTO hotel : hotelList) {
+	        if (hotel.getHotelId() == hotelId) {
+	            selectedHotel = hotel;
+	            break;
+	        }
 	    }
+
+	    if (selectedHotel != null && hotelSearch != null) {
+	        model.addAttribute("selectedHotel", selectedHotel);
+	        model.addAttribute("hotelSearch", hotelSearch);
+	    }
+
+		
+		return "hotelDetails"; // Return the name of the view to display hotel details
+	}
 
 }

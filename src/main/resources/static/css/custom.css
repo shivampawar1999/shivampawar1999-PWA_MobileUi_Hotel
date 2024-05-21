@@ -1,8 +1,13 @@
 .dropdown-menu a.dropdown-item {
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
 }
 
 .dropdown-menu a.dropdown-item img {
-    margin-right: 10px;
+	margin-right: 10px;
 }
+
+.swiper {
+	height: 320px;
+}
+
