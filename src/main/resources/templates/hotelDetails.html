@@ -17,7 +17,7 @@
 
 <!-- Favicon -->
 <link rel="icon" type="image/x-icon"
-	href="../../assets/img/favicon/favicon.ico" />
+	href="../../assets/img/favicon/travelwings-logo.ico" />
 
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -116,7 +116,7 @@
 
 				<!-- Hotel Address -->
 				<div class="text-muted mb-2 d-flex flex-wrap">
-					<span><i
+					<span style="margin-right: 5px;"><i
 						class="fa-solid fa-location-dot mt-1 mr-2 text-danger"></i></span>
 					<span th:text="${selectedHotel.hotelAddress}"></span> <a href="javascript:void(0)" class="me-3"
 						style="margin-left: 5px;"></a> <span
@@ -204,7 +204,7 @@
 									class='bx bxs-bed bx-sm'></i></span>
 							</div>
 							<div>
-								<h6 class="mb-0 text-nowrap">1</h6>
+								<h6 class="mb-0 text-nowrap" th:text="${hotelSearch.numberOfRooms}"></h6>
 								<small>room</small>
 							</div>
 						</div>

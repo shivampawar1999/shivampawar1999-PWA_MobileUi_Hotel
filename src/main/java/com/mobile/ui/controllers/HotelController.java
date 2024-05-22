@@ -29,6 +29,9 @@ public class HotelController {
 
 	public List<HotelRequestDTO> hotelList;
 	public HotelSearch hotelSearch;
+	
+	
+	/*------------------------------------------------------------------------*/
 
 	@GetMapping("/hotelSearch")
 	public String hotelSearch(Model model) {
@@ -62,29 +65,38 @@ public class HotelController {
 
 	}
 
+	/* calculate number of room as per user */
+	private int calculateNumberOfRooms(int selectedTraveler) {
+		return (selectedTraveler + 1) / 2; // This ensures 1 room for up to 2 travelers, 2 rooms for up to 4 travelers,
+											// and so on.
+	}
+
 	// execute after select room
 	@PostMapping("/hotelList/{hotelId}")
 	public String handleHotelSelection(@PathVariable("hotelId") long hotelId, Model model) {
-		
+
 		System.out.println("Selected hotel ID: " + hotelId);
 		System.out.println(hotelSearch);
-		
-		
-		  // Find the hotel with the matching ID
-	    HotelRequestDTO selectedHotel = null;
-	    for (HotelRequestDTO hotel : hotelList) {
-	        if (hotel.getHotelId() == hotelId) {
-	            selectedHotel = hotel;
-	            break;
-	        }
-	    }
 
-	    if (selectedHotel != null && hotelSearch != null) {
-	        model.addAttribute("selectedHotel", selectedHotel);
-	        model.addAttribute("hotelSearch", hotelSearch);
-	    }
+		// Find the hotel with the matching ID
+		HotelRequestDTO selectedHotel = null;
+		for (HotelRequestDTO hotel : hotelList) {
+			if (hotel.getHotelId() == hotelId) {
+				selectedHotel = hotel;
+				break;
+			}
+		}
 
-		
+		if (selectedHotel != null && hotelSearch != null) {
+
+			// Calculate the number of rooms based on the number of travelers
+			int numberOfRooms = calculateNumberOfRooms(hotelSearch.getSelectedTraveler());
+			hotelSearch.setNumberOfRooms(numberOfRooms);
+
+			model.addAttribute("selectedHotel", selectedHotel);
+			model.addAttribute("hotelSearch", hotelSearch);
+		}
+
 		return "hotelDetails"; // Return the name of the view to display hotel details
 	}
 
