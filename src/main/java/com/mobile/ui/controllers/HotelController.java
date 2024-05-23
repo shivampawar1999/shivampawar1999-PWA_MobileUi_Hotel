@@ -28,14 +28,16 @@ public class HotelController {
 	private ObjectMapper objectMapper;
 
 	public List<HotelRequestDTO> hotelList;
-	public HotelSearch hotelSearch;
+	  // Initialize hotelSearch
+    private HotelSearch hotelSearch = new HotelSearch();
 	
 	
 	/*------------------------------------------------------------------------*/
 
 	@GetMapping("/hotelSearch")
 	public String hotelSearch(Model model) {
-
+		
+		model.addAttribute("hotelSearch", hotelSearch);
 		return "hotelSearch";
 	}
 
@@ -43,6 +45,7 @@ public class HotelController {
 	public String hotelList(@ModelAttribute HotelSearch hotelSearch, Model model) {
 
 		this.hotelSearch = hotelSearch;
+		model.addAttribute("hotelSearch", hotelSearch);
 		// Make an HTTP GET request to the hotelDataList API
 		String apiUrl = "http://localhost:8091/hotelDataList";
 		ResponseEntity<String> responseEntity = restTemplate.getForEntity(apiUrl, String.class);
