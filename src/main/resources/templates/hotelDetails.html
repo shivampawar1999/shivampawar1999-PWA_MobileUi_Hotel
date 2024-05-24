@@ -111,16 +111,56 @@
 					</div>
 
 				</div>
-				<h4 class="mb-2 pb-1" th:text="${selectedHotel.hotelName}">Hotel Name</h4>
+				<h4 class="mb-2 pb-1" th:text="${selectedHotel.hotelName}">Hotel
+					Name</h4>
 				<p class="small" th:text="${selectedHotel.highlight}"></p>
+
+				<!-- ------------------------------------------------------------------------- -->
+				<div class="row mb-3 g-3">
+					<div class="col-6">
+						<div class="d-flex">
+							<h6>FACILITIES</h6>
+						</div>
+					</div>
+					<div class="col-6">
+						<div class="d-flex">
+							<ul class="p-0">
+								<!-- Iterate over each facility -->
+								<li th:each="facility : ${selectedHotel.hotelFacility}"
+									class="d-inline-block" style="margin-right: 5px;">
+									<!-- Square box with icon inside -->
+									<div class="border rounded p-1">
+										<i th:if="${facility == 'Free Wi-Fi'}" class="fas fa-wifi"></i>
+										<i th:if="${facility == 'Swimming Pool'}"
+											class="fas fa-swimming-pool"></i> <i
+											th:if="${facility == 'Gym'}" class="fas fa-dumbbell"></i> <i
+											th:if="${facility == 'Luggage Storage'}"
+											class="fas fa-suitcase"></i> <i
+											th:if="${facility == 'Room Service'}"
+											class="fas fa-concierge-bell"></i> <i
+											th:if="${facility == 'Bar'}" class="fas fa-glass-martini-alt"></i>
+										<i th:if="${facility == 'Spa'}" class="fas fa-spa"></i> <i
+											th:if="${facility == 'Restaurant'}" class="fas fa-utensils"></i>
+										<i th:if="${facility == 'Parking'}" class="fas fa-parking"></i>
+										<i th:if="${facility == 'Car Rental'}" class="fas fa-car"></i>
+										<i th:if="${facility == 'Coffee'}" class="fas fa-coffee"></i>
+										<!-- Add more conditions for other facilities as needed -->
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
 
 				<!-- Hotel Address -->
 				<div class="text-muted mb-2 d-flex flex-wrap">
 					<span style="margin-right: 5px;"><i
-						class="fa-solid fa-location-dot mt-1 mr-2 text-danger"></i></span>
-					<span th:text="${selectedHotel.hotelAddress}"></span> <a href="javascript:void(0)" class="me-3"
-						style="margin-left: 5px;"></a> <span
-						class="badge bg-label-success" th:text="${selectedHotel.hotelCity}"> city</span>
+						class="fa-solid fa-location-dot mt-1 mr-2 text-danger"></i></span> <span
+						th:text="${selectedHotel.hotelAddress}"></span> <a
+						href="javascript:void(0)" class="me-3" style="margin-left: 5px;"></a>
+					<span class="badge bg-label-success"
+						th:text="${selectedHotel.hotelCity}"> city</span>
 				</div>
 
 				<div class="row mb-3 g-3">
@@ -128,9 +168,10 @@
 						<div class="d-flex">
 
 							<div>
-								<span style="font-weight: bold;">Price : </span>
-								<span class="text-primary">$</span> <span class="text-primary" th:text="${selectedHotel.roomPrice}">/</span>
-								<s class="text-muted">$359</s>
+								<span style="font-weight: bold;">Price : </span> <span
+									class="text-primary">$</span> <span class="text-primary"
+									th:text="${selectedHotel.roomPrice}">/</span> <s
+									class="text-muted">$359</s>
 							</div>
 
 						</div>
@@ -142,17 +183,14 @@
 							<h6
 								class="align-items-center justify-content-center gap-1 mb-1 mt-1"
 								style="padding-left: 40px;">
-								<span style="font-size: 1.125rem; vertical-align: middle;"  th:text="${selectedHotel.hotelRating}"></span>
-								<span class="text-warning"><i class="bx bxs-star me-1"></i></span>
+								<span style="font-size: 1.125rem; vertical-align: middle;"
+									th:text="${selectedHotel.hotelRating}"></span> <span
+									class="text-warning"><i class="bx bxs-star me-1"></i></span>
 							</h6>
 
 						</div>
 					</div>
 				</div>
-
-
-
-
 
 
 				<div class="row mb-3 g-3">
@@ -178,7 +216,7 @@
 							<div>
 								<h6 class="mb-0 text-nowrap" th:text="${hotelSearch.toDate}"></h6>
 								<small>Check-Out</small>
-							</div> 
+							</div>
 						</div>
 					</div>
 				</div>
@@ -191,7 +229,8 @@
 									class="bx bx-walk bx-sm"></i></span>
 							</div>
 							<div>
-								<h6 class="mb-0 text-nowrap" th:text="${hotelSearch.selectedTraveler}"></h6>
+								<h6 class="mb-0 text-nowrap"
+									th:text="${hotelSearch.selectedTraveler}"></h6>
 								<small>Guest</small>
 							</div>
 
@@ -204,16 +243,33 @@
 									class='bx bxs-bed bx-sm'></i></span>
 							</div>
 							<div>
-								<h6 class="mb-0 text-nowrap" th:text="${hotelSearch.numberOfRooms}"></h6>
-								<small>room</small>
+								<h6 class="mb-0 text-nowrap"
+									th:text="${hotelSearch.numberOfRooms}"></h6>
+								<small>room for <span th:text="${hotelSearch.nightsStay}">[nightsStay]</span> Night</small>
+
 							</div>
 						</div>
 					</div>
 				</div>
+
+				<!-- ------------------------------------------------------------- -->
+
+				<!-- ------------------------------------------------------------- -->
+
+
+				<!-- Form for selecting room -->
+
 				<div class="col-12 text-center">
-					<a href="javascript:void(0);" class="btn btn-warning w-100 d-grid">BOOK
-						NOW</a>
+					<form th:action="@{/itinerary}" method="post">
+						<button type="submit" class="btn btn-warning w-100 d-grid">BOOK
+							NOW</button>
+					</form>
 				</div>
+
+
+
+
+
 			</div>
 		</div>
 	</div>

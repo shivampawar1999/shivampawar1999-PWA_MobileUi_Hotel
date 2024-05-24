@@ -1,5 +1,7 @@
 package com.mobile.ui.controllers;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,15 +30,17 @@ public class HotelController {
 	private ObjectMapper objectMapper;
 
 	public List<HotelRequestDTO> hotelList;
-	  // Initialize hotelSearch
-    private HotelSearch hotelSearch = new HotelSearch();
-	
-	
+	// Initialize hotelSearch
+	public HotelSearch hotelSearch = new HotelSearch();
+
+	// Find the hotel with the matching ID
+	public HotelRequestDTO selectedHotel;
+
 	/*------------------------------------------------------------------------*/
 
 	@GetMapping("/hotelSearch")
 	public String hotelSearch(Model model) {
-		
+
 		model.addAttribute("hotelSearch", hotelSearch);
 		return "hotelSearch";
 	}
@@ -70,19 +74,24 @@ public class HotelController {
 
 	/* calculate number of room as per user */
 	private int calculateNumberOfRooms(int selectedTraveler) {
-		return (selectedTraveler + 1) / 2; // This ensures 1 room for up to 2 travelers, 2 rooms for up to 4 travelers,
+		return (selectedTraveler + 1) / 2; // This ensures 1 room for up to 2 travelers, 2 rooms for up to 3/4
+											// travelers,
 											// and so on.
 	}
 
+	/* calculate nights */
+	public long calculateNightsStay(LocalDate fromDate, LocalDate toDate) {
+        return ChronoUnit.DAYS.between(fromDate, toDate);
+    }
+
+
 	// execute after select room
-	@PostMapping("/hotelList/{hotelId}")
+	@PostMapping("/hotelDetail/{hotelId}")
 	public String handleHotelSelection(@PathVariable("hotelId") long hotelId, Model model) {
 
 		System.out.println("Selected hotel ID: " + hotelId);
 		System.out.println(hotelSearch);
 
-		// Find the hotel with the matching ID
-		HotelRequestDTO selectedHotel = null;
 		for (HotelRequestDTO hotel : hotelList) {
 			if (hotel.getHotelId() == hotelId) {
 				selectedHotel = hotel;
@@ -95,12 +104,27 @@ public class HotelController {
 			// Calculate the number of rooms based on the number of travelers
 			int numberOfRooms = calculateNumberOfRooms(hotelSearch.getSelectedTraveler());
 			hotelSearch.setNumberOfRooms(numberOfRooms);
+			
+
+	        // Call the service to calculate the number of nights
+	        long nightsStay = calculateNightsStay(hotelSearch.getFromDate(), hotelSearch.getToDate());
+	        hotelSearch.setNightsStay(nightsStay);
 
 			model.addAttribute("selectedHotel", selectedHotel);
 			model.addAttribute("hotelSearch", hotelSearch);
 		}
 
 		return "hotelDetails"; // Return the name of the view to display hotel details
+	}
+
+	/* Your Itinerary controller */
+	@PostMapping("/itinerary")
+	public String yourItinerary(Model model) {
+
+		model.addAttribute("selectedHotel", selectedHotel);
+		model.addAttribute("hotelSearch", hotelSearch);
+
+		return "itinerary";
 	}
 
 }
